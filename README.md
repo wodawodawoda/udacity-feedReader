@@ -11,17 +11,17 @@ In this project I had to write tests in Jasmine to check if all application feat
 * Tests results will be visible on the bottom of the page
 
 ## Test cases
-* Are RSS Feeds:
- * defined?
- * contain not empty URL value?
- * contain defined feed name?
+* RSS Feeds:
+    * are defined
+    * contain not empty URL value
+    * contain defined feed name
 * The menu:
- * should be hidden by default?
- * should be visible on menu icon click?
+    * should be hidden by default
+    * should be visible on menu icon click
 * Initial Entries:
- * should load at least one feed element
+    * should load at least one feed element
 * New Feed Selection:
- * should change feed content
+    * should change feed content
 
 ## Important files
 * index.html - main application html file
