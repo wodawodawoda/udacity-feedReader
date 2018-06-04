@@ -51,24 +51,18 @@ $(function() {
 
 	/* TODO: Write a new test suite named "The menu" */
 	describe('The menu', function () {
-		let bodyClass;
-		let position;
-		let btn;
+		let isClassHidden = () => document.body.className.includes('menu-hidden');;
+		let isPositionHidden = () => document.querySelector('.slide-menu').getBoundingClientRect().left < 0;
+		const btn = document.querySelector('.menu-icon-link') // $('.menu-icon-link');
 		/* TODO: Write a test that ensures the menu element is
 		 * hidden by default. You'll have to analyze the HTML and
 		 * the CSS to determine how we're performing the
 		 * hiding/showing of the menu element.
 		 */
-		beforeEach(function () {
-			bodyClass = document.body.className.includes('menu-hidden');
-			position = document.querySelector('.slide-menu').getBoundingClientRect().left < 0;
-			btn = document.querySelector('.menu-icon-link') // $('.menu-icon-link')
-
-		});
 
 		it('should be hidden by default', function () {
-
-			expect(bodyClass && position).toBeTruthy();
+			expect(isClassHidden()).toBeTruthy();
+			expect(isPositionHidden()).toBeTruthy();
 		});
 
 		/* TODO: Write a test that ensures the menu changes
@@ -77,20 +71,10 @@ $(function() {
 		 * clicked and does it hide when clicked again.
 		 */
 		it('should be visible on menu icon click', function () {
-			let count = 0;
-			document.querySelector('.slide-menu').addEventListener('transitionend', function() {
-				position = document.querySelector('.slide-menu').getBoundingClientRect().left < 0;
-				bodyClass = document.body.className.includes('menu-hidden');
-				if(count) {
-					expect(bodyClass && position).toBeTruthy();
-				} else {
-					count++;
-					// Trigger menu hide on transition end after first click
-					btn.click();
-					expect(bodyClass && position).toBeFalsy();
-				}
-			});
 			btn.click();
+			expect(isClassHidden()).toBeFalsy()
+			btn.click();
+			expect(isClassHidden()).toBeTruthy()
 		});
 	});
 
@@ -132,7 +116,7 @@ $(function() {
 		 * Remember, loadFeed() is asynchronous.
 		 */
 		it('should change feed content', function (done) {
-			expect(updated !== undefined !== main).toBeTruthy();
+			expect(updated).not.toBe(main || undefined);
 			done();
 		});
 	});
