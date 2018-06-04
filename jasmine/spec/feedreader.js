@@ -42,7 +42,7 @@ $(function() {
 		 * in the allFeeds object and ensures it has a name defined
 		 * and that the name is not empty.
 		 */
-		it('', function () {
+		it('contain defined feed name', function () {
 			const isEmpty = allFeeds.every(feed => feed.name);
 			expect(isEmpty).toBeTruthy();
 		});
