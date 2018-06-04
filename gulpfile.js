@@ -96,7 +96,7 @@ gulp.task('lint', function () {
 
 // Testing
 gulp.task('tests', function () {
-	gulp.src('jasmine/spec/extraSpec.js')
+	gulp.src('jasmine/spec/feedreader.js')
 		.pipe(jasmine({
 			integration: true,
 			vendor: 'js/**/*.js'

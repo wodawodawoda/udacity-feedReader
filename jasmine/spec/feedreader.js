@@ -35,7 +35,7 @@ $(function() {
 			const isEmpty = allFeeds.every(feed => feed.url);
 
 			expect(isEmpty).toBeTruthy();
-		})
+		});
 
 
 		/* TODO: Write a test that loops through each feed
@@ -45,7 +45,7 @@ $(function() {
 		it('', function () {
 			const isEmpty = allFeeds.every(feed => feed.name);
 			expect(isEmpty).toBeTruthy();
-		})
+		});
 	});
 
 
@@ -85,6 +85,7 @@ $(function() {
 					expect(bodyClass && position).toBeTruthy();
 				} else {
 					count++;
+					// Trigger menu hide on transition end after first click
 					btn.click();
 					expect(bodyClass && position).toBeFalsy();
 				}
@@ -111,7 +112,7 @@ $(function() {
 			expect(isEmpty).toBeTruthy();
 			done();
 		});
-	})
+	});
 
 	/* TODO: Write a new test suite named "New Feed Selection" */
 	describe('New Feed Selection', function () {
@@ -120,10 +121,8 @@ $(function() {
 		beforeEach(function (done) {
 			loadFeed(0, function() {
 				main = document.querySelector('.feed').firstElementChild;
-				console.log({jeden: main})
 				loadFeed(1, function () {
-					updated = document.querySelector('.feed').firstElementChild
-					console.log({dwa: updated})
+					updated = document.querySelector('.feed').firstElementChild;
 				});
 				done();
 			});
@@ -136,5 +135,5 @@ $(function() {
 			expect(updated !== undefined !== main).toBeTruthy();
 			done();
 		});
-	})
+	});
 }());
