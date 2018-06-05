@@ -32,9 +32,8 @@ $(function() {
 		 * and that the URL is not empty.
 		 */
 		it('contain not empty URL value', function () {
-			const isEmpty = allFeeds.every(feed => feed.url);
-
-			expect(isEmpty).toBeTruthy();
+			const urlsIsNotEmpty = allFeeds.every(feed => feed.url);
+			expect(urlsIsNotEmpty).toBeTruthy();
 		});
 
 
@@ -43,17 +42,20 @@ $(function() {
 		 * and that the name is not empty.
 		 */
 		it('contain defined feed name', function () {
-			const isEmpty = allFeeds.every(feed => feed.name);
-			expect(isEmpty).toBeTruthy();
+			const nameIsDefined = allFeeds.every(feed => feed.name);
+			expect(nameIsDefined).toBeTruthy();
 		});
 	});
 
 
 	/* TODO: Write a new test suite named "The menu" */
 	describe('The menu', function () {
-		let isClassHidden = () => document.body.className.includes('menu-hidden');;
-		let isPositionHidden = () => document.querySelector('.slide-menu').getBoundingClientRect().left < 0;
-		const btn = document.querySelector('.menu-icon-link') // $('.menu-icon-link');
+		const btn = $('.menu-icon-link')[0];
+		let isClassHidden = () => $('body').hasClass('menu-hidden');
+		/* Checks if menu div is positioned outside of viewport (left edge),
+		* Returns boolean
+		*/
+		let isPositionHidden = () => $('.slide-menu')[0].getBoundingClientRect().left < 0;
 		/* TODO: Write a test that ensures the menu element is
 		 * hidden by default. You'll have to analyze the HTML and
 		 * the CSS to determine how we're performing the
@@ -72,9 +74,9 @@ $(function() {
 		 */
 		it('should be visible on menu icon click', function () {
 			btn.click();
-			expect(isClassHidden()).toBeFalsy()
+			expect(isClassHidden()).toBeFalsy();
 			btn.click();
-			expect(isClassHidden()).toBeTruthy()
+			expect(isClassHidden()).toBeTruthy();
 		});
 	});
 
@@ -91,10 +93,9 @@ $(function() {
 		 * Remember, loadFeed() is asynchronous so this test will require
 		 * the use of Jasmine's beforeEach and asynchronous done() function.
 		 */
-		it('should load at least one feed element', function (done) {
-			const isEmpty = document.querySelector('.feed').firstElementChild !== null;
-			expect(isEmpty).toBeTruthy();
-			done();
+		it('should load at least one feed element', function () {
+			const feedChild = $('.feed')[0].firstChild;
+			expect(feedChild).not.toBeNull();
 		});
 	});
 
@@ -107,17 +108,16 @@ $(function() {
 				main = document.querySelector('.feed').firstElementChild;
 				loadFeed(1, function () {
 					updated = document.querySelector('.feed').firstElementChild;
+					done();
 				});
-				done();
 			});
 		});
 		/* TODO: Write a test that ensures when a new feed is loaded
 		 * by the loadFeed function that the content actually changes.
 		 * Remember, loadFeed() is asynchronous.
 		 */
-		it('should change feed content', function (done) {
-			expect(updated).not.toBe(main || undefined);
-			done();
+		it('should change feed content', function () {
+			expect(updated).not.toBe(main);
 		});
 	});
 }());
